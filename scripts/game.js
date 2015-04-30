@@ -54,17 +54,17 @@ $(document).keyup(function(e){
 
 
 function init(){
-	
+	link = new Link();
 	loop();
 	// DON'T PUT ANYTHING AFTER THE GAME LOOP STARTS!
 }
 
 function update(){
-	
+	link.update();
 }
 
 function render(){
-	
+	link.draw();
 }
 
 gameCanvas.font = "bold 50px monaco";
