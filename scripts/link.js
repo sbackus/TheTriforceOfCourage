@@ -10,14 +10,31 @@ function Link() {
 	this.time = 0;
 	this.frames = 0;
 	this.frame_rate = 6;
+	this.action = "standing";
 
 	this.draw =  function(){
-		gameCanvas.drawImage(this.image, 100*(this.frames%4), 500,this.frameSize,this.frameSize,0,0,this.frameSize,this.frameSize);
+		if (this.action == "standing"){
+			gameCanvas.drawImage(this.image, 0, 0,this.frameSize,this.frameSize,0,0,this.frameSize,this.frameSize);
+		} 
+		else if (this.action == "running_left"){
+			gameCanvas.drawImage(this.image, 100*(this.frames%4), 400,this.frameSize,this.frameSize,0,0,this.frameSize,this.frameSize);
+		}
+		else if (this.action == "running_right"){
+			gameCanvas.drawImage(this.image, 100*(this.frames%4), 500,this.frameSize,this.frameSize,0,0,this.frameSize,this.frameSize);
+		}
+		else if (this.action == "attack1"){
+			gameCanvas.drawImage(this.image, 100*(this.frames%4), 800,this.frameSize,this.frameSize,0,0,this.frameSize,this.frameSize);
+		}
+
 	};
 	this.update = function(){
 		this.time ++;
 		if(this.time%this.frame_rate == 0){
 			this.frames ++;
 		}
+		this.action = "standing"
+		if(keys[key.left]||keys[key.a]) {this.action = "running_left"}
+		if(keys[key.right]||keys[key.d]) {this.action = "running_right"}
+		if(keys[key.space]) {this.action = "attack1"}
 	};
 };
