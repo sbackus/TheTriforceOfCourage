@@ -9,8 +9,8 @@ window.requestAnimFrame = (function(){
 			};
 })();
 
-var width = 500;
-var height = 400;
+var width = 398;
+var height = 177;
 
 var images = [];
 var doneImages = 0;
@@ -64,6 +64,7 @@ function update(){
 }
 
 function render(){
+	gameCanvas.drawImage(images[2], 0, 0);
 	link.draw();
 }
 
@@ -71,6 +72,6 @@ gameCanvas.font = "bold 50px monaco";
 gameCanvas.fillStyle = "white";
 gameCanvas.fillText("loading",width/2-100,height/2);
 
-loadImages(["images/linkf.png","images/linkf_right.png"]);
+loadImages(["images/link_left.gif","images/link_right.gif","images/background.png"]);
 
 checkImages();

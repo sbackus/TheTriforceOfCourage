@@ -7,7 +7,7 @@ function Link() {
 	this.facing_right_image = images[1];
 	this.width = 100;
 	this.height = 100;
-	this.max_y = height-this.height;
+	this.max_y = height-this.height-30;
 	this.x = 0;
 	this.y = this.max_y;
 	this.frameSize = 100;
@@ -26,7 +26,7 @@ function Link() {
 			draw_frame = 100*(this.frames%4)
 			this.image = this.facing_left_image;
 		}else if(this.facing == "right"){
-			draw_frame = 100*(4 - this.frames%4)
+			draw_frame = 100*(3 - this.frames%4)
 			this.image = this.facing_right_image;
 		}	
 		if (this.jumping){
