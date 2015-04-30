@@ -68,7 +68,7 @@ function render(){
 }
 
 gameCanvas.font = "bold 50px monaco";
-gameCanvas.fillStyle = "black";
+gameCanvas.fillStyle = "white";
 gameCanvas.fillText("loading",width/2-100,height/2);
 
 loadImages(["images/linkf.png","images/linkf_right.png"]);
