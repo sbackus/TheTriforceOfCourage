@@ -7,13 +7,14 @@ function Link() {
 	this.facing_right_image = images[1]
 	this.x = 0;
 	this.y = 0;
-	this.width =  10;
-	this.height =  10;
+	this.width = 100;
+	this.height = 100;
 	this.frameSize = 100;
 	this.time = 0;
 	this.frames = 5;
 	this.frame_rate = 6;
 	this.action = "standing";
+	this.speed = 2;
 
 	this.draw =  function(){
 		var draw_frame = 0
@@ -25,13 +26,15 @@ function Link() {
 			this.image = this.facing_right_image;
 		}
 		if (this.action == "standing"){
-			gameCanvas.drawImage(this.image, 0, 0,this.frameSize,this.frameSize,0,0,this.frameSize,this.frameSize);
+			gameCanvas.drawImage(this.image, 0, 0,this.frameSize,this.frameSize,this.x,this.y,this.frameSize,this.frameSize);
 		} 
 		else if (this.action == "running"){
-			gameCanvas.drawImage(this.image, 100*(this.frames%4), 400,this.frameSize,this.frameSize,0,0,this.frameSize,this.frameSize);
+			gameCanvas.drawImage(this.image, 100*(this.frames%4), 400,this.frameSize,this.frameSize,this.x,this.y,this.frameSize,this.frameSize);
 		}
 		else if (this.action == "attack1"){
-			gameCanvas.drawImage(this.image, draw_frame, 800,this.frameSize,this.frameSize,0,0,this.frameSize,this.frameSize);
+			gameCanvas.drawImage(this.image, draw_frame, 800,this.frameSize,this.frameSize,this.x,this.y,this.frameSize,this.frameSize);
+		}else if (this.action == "crouching"){
+			gameCanvas.drawImage(this.image, 0, 200,this.frameSize,this.frameSize,this.x,this.y,this.frameSize,this.frameSize);
 		}
 
 	};
@@ -41,22 +44,24 @@ function Link() {
 			this.frames ++;
 		}
 		this.action = "standing"
-		if(keys[key.left]||keys[key.a]) {
-			this.facing = "left";
-			this.action = "running";
-		}
-		if(keys[key.right]||keys[key.d]) {
-			this.facing = "right";
-			this.action = "running";
-		}
 		if(keys[key.space]) {
 			this.frames = 0;
 			this.time = 0;
 			this.action = "attack1";
-		}
-		if(this.frames<5){
+		} else if(this.frames<5){
 			this.action = "attack1";
+		}else if(keys[key.down]||keys[key.s]){
+			this.action = "crouching"
+		}else if((keys[key.left]||keys[key.a]) && this.x>0){
+			this.facing = "left";
+			this.action = "running";
+			this.x -= this.speed;
+		}else if((keys[key.right]||keys[key.d]) && this.x<(width-this.width)) {
+			this.facing = "right";
+			this.action = "running";
+			this.x += this.speed;
 		}
+		
 
 	};
 };
